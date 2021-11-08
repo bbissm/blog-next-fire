@@ -17,7 +17,7 @@ export default function Home() {
             query: {username: 'martin'}    
         }}
         >
-        <a>Jeff's Profile</a>
+        <a>My Profile</a>
         </Link>
         <div>
           <button onClick={() => toast.success('hello toast!')}>
