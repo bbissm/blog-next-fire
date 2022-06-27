@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { UserContext } from '../lib/context';
 import { auth } from '../lib/firebase';
+import AuthCheck from './AuthCheck';
 
 // Top navbar
 export default function Navbar() {
@@ -23,7 +24,7 @@ export default function Navbar() {
             <button className="btn-logo">NXT</button>
           </Link>
         </li>
-
+       
         {/* user is signed-in and has username */}
         {username && (
           <>
@@ -31,7 +32,12 @@ export default function Navbar() {
               <button onClick={signOut}>Sign Out</button>
             </li>
             <li>
-              <Link href="/admin">
+              <Link href="/admin/news">
+                <button className="btn-green">News</button>
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin/posts">
                 <button className="btn-blue">Write Posts</button>
               </Link>
             </li>
