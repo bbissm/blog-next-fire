@@ -5,17 +5,33 @@ import AuthCheck from "../../../components/AuthCheck";
 import { firestore } from "../../../lib/firebase";
 import { serverTimestamp } from "firebase/firestore";
 import toast from "react-hot-toast";
+import { useCollection } from "react-firebase-hooks/firestore";
+import NewsFeed from "../../../components/NewsFeed";
 
 export default function AdminPostsPage(props) {
     return (
       <main>
         <AuthCheck>
           <CreateNewNews />
+          <NewsList />
         </AuthCheck>
       </main>
     );
   }
-
+function NewsList() {
+    const ref = firestore.collection('news');
+    const query = ref.orderBy('createdAt');
+    const [querySnapshot] = useCollection(query);
+  
+    const news = querySnapshot?.docs.map((doc) => doc.data());
+  
+    return (
+      <>
+        <h1>Add News</h1>
+        <NewsFeed news={news} admin />
+      </>
+    );
+  }
 function CreateNewNews() {
     const router = useRouter();
     const [title, setTitle] = useState('');
@@ -49,7 +65,7 @@ function CreateNewNews() {
       toast.success('News created!')
   
       // Imperative navigation after doc is set
-      router.push(`/admin/news/${slug}`);
+      // router.push(`/admin/news/${slug}`);
     };
   
     return (
