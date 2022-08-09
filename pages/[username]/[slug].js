@@ -11,6 +11,7 @@ export async function getStaticProps({ params }) {
   
     if (userDoc) {
       const postRef = userDoc.ref.collection('posts').doc(slug);
+
       post = postToJSON(await postRef.get());
   
       path = postRef.path;
@@ -44,9 +45,10 @@ export async function getStaticProps({ params }) {
   }
 
 export default function Post(props) {
-  console.log(props)
     const postRef = firestore.doc(props.path);
+
     const [realtimePost] = useDocumentData(postRef);
+    console.log(realtimePost)
 
     const post = realtimePost || props.post;
     return (

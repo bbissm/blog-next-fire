@@ -11,38 +11,38 @@ import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
-export default function AdminPostEdit(props) {
+export default function AdminNewsEdit(props) {
   return (
     <AuthCheck>
-        <PostManager />
+        <NewsManager />
     </AuthCheck>
   );
 }
 
-function PostManager() {
+function NewsManager() {
   const [preview, setPreview] = useState(false);
 
   const router = useRouter();
   const { slug } = router.query;
 
-  const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(slug);
-  const [post] = useDocumentData(postRef);
+  const newsRef = firestore.collection('news').doc(slug);
+  const [news] = useDocumentData(newsRef);
 
   return (
     <main className={styles.container}>
-      {post && (
+      {news && (
         <>
           <section>
-            <h1>{post.title}</h1>
-            <p>ID: {post.slug}</p>
+            <h1>{news.title}</h1>
+            <p>ID: {news.slug}</p>
 
-            <PostForm postRef={postRef} defaultValues={post} preview={preview} />
+            <NewsForm newsRef={newsRef} defaultValues={news} preview={preview} />
           </section>
 
           <aside>
           <h3>Tools</h3>
             <button onClick={() => setPreview(!preview)}>{preview ? 'Edit' : 'Preview'}</button>
-            <Link href={`/${post.username}/${post.slug}`}>
+            <Link href={`/${news.username}/${news.slug}`}>
               <button className="btn-blue">Live view</button>
             </Link>
           </aside>
@@ -52,12 +52,12 @@ function PostManager() {
   );
 }
 
-function PostForm({ defaultValues, postRef, preview }) {
+function NewsForm({ defaultValues, newsRef, preview }) {
   const { register, handleSubmit, reset, watch } = useForm({ defaultValues, mode: 'onChange' });
 
-  const updatePost = async ({ content, published }) => {
+  const updateNews = async ({ content, published }) => {
     console.log('form submited')
-    await postRef.update({
+    await newsRef.update({
       content,
       published,
       updatedAt: serverTimestamp(),
@@ -65,11 +65,11 @@ function PostForm({ defaultValues, postRef, preview }) {
 
     reset({ content, published });
 
-    toast.success('Post updated successfully!')
+    toast.success('News updated successfully!')
   };
 
   return (
-    <form onSubmit={handleSubmit(updatePost)}>
+    <form onSubmit={handleSubmit(updateNews)}>
       {preview && (
         <div className="card">
           <ReactMarkdown>{watch('content')}</ReactMarkdown>

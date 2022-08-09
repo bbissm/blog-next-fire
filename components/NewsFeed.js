@@ -23,7 +23,7 @@ function NewsItem({ newsEntry, admin = false }) {
       {/* If admin view, show extra controls for user */}
       {admin && (
         <>
-          <Link href={`/admin/${newsEntry.slug}`}>
+          <Link href={`/admin/news/${newsEntry.slug}`}>
             <h3>
               <button className="btn-blue">Edit</button>
             </h3>

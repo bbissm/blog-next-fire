@@ -1,3 +1,5 @@
+import styles from '../../../styles/Admin.module.css';
+
 import kebabCase from "lodash.kebabcase";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -74,19 +76,20 @@ function CreateNewNews() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="My News entry title"
-          className="input"
+          className={styles.input}
+
         />
         <textarea 
             value={teaser}
             onChange={(e) => setTeaser(e.target.value)}
             placeholder="Teaser"
-            className="input" 
+            className={styles.input}
         />
         <textarea 
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Content"
-            className="input" 
+            className={styles.input}
         />
         <p>
           <strong>Slug:</strong> {slug}
