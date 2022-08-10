@@ -53,7 +53,9 @@ function NewsManager() {
 }
 
 function NewsForm({ defaultValues, newsRef, preview }) {
-  const { register, handleSubmit, reset, watch } = useForm({ defaultValues, mode: 'onChange' });
+  const { register, handleSubmit, reset, watch, formState } = useForm({ defaultValues, mode: 'onChange' });
+
+  const { isValid, isDirty, errors } = formState;
 
   const updateNews = async ({ content, published }) => {
     console.log('form submited')
@@ -78,14 +80,18 @@ function NewsForm({ defaultValues, newsRef, preview }) {
 
       <div className={preview ? styles.hidden : styles.controls}>
   
-        <textarea {...register('content')}></textarea>
+        <textarea {...register('content', {maxLength:{value:2000,message:'Max value is 2000'}, minLength:{value:10,message:'Min value is 10'}, required: "This is required."})}></textarea>
+        
+        {console.log(errors)}
+        {errors.content && <p className="text-danger">{errors.content.message}</p>}
 
+      
         <fieldset>
           <input className={styles.checkbox} type="checkbox" {...register('published')} />
           <label>Published</label>
         </fieldset>
 
-        <button type="submit" className="btn-green">
+        <button type="submit" className="btn-green" disabled={!isDirty || !isValid}>
           Save Changes
         </button>
       </div>
