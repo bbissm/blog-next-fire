@@ -4,7 +4,7 @@ import kebabCase from "lodash.kebabcase";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import AuthCheck from "../../../components/AuthCheck";
-import { firestore } from "../../../lib/firebase";
+import { firestore, auth } from "../../../lib/firebase";
 import { serverTimestamp } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -49,6 +49,8 @@ function CreateNewNews() {
     // Create a new post in firestore
     const createNews = async (e) => {
       e.preventDefault();
+      const uid = auth.currentUser.uid;
+
       const ref = firestore.collection('news').doc(slug);
   
       // Tip: give all fields a default value here
@@ -58,6 +60,7 @@ function CreateNewNews() {
         published: false,
         teaser,
         content,
+        uid,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };
