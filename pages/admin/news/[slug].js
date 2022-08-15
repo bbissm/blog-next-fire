@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import ImageUploader from '../../../components/ImageUploader';
 
 export default function AdminNewsEdit(props) {
   return (
@@ -71,6 +72,8 @@ function NewsForm({ defaultValues, newsRef, preview }) {
   };
 
   return (
+    <>
+    <ImageUploader />
     <form onSubmit={handleSubmit(updateNews)}>
       {preview && (
         <div className="card">
@@ -96,5 +99,7 @@ function NewsForm({ defaultValues, newsRef, preview }) {
         </button>
       </div>
     </form>
+    </>
+  
   );
 }
