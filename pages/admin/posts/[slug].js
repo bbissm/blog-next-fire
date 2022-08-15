@@ -78,10 +78,15 @@ function PostForm({ defaultValues, postRef, preview }) {
 
       <div className={preview ? styles.hidden : styles.controls}>
   
-        <textarea {...register('content')}></textarea>
+        <textarea 
+        rows="30"
+        className="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+         {...register('content')}></textarea>
 
         <fieldset>
-          <input className={styles.checkbox} type="checkbox" {...register('published')} />
+          <input             
+          type="checkbox" 
+          {...register('published')} />
           <label>Published</label>
         </fieldset>
 

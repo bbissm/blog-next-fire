@@ -29,7 +29,6 @@ function NewsList() {
   
     return (
       <>
-        <h1>Add News</h1>
         <NewsFeed news={news} admin />
       </>
     );
@@ -74,32 +73,56 @@ function CreateNewNews() {
     };
   
     return (
-      <form onSubmit={createNews}>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="My News entry title"
-          className={styles.input}
-
-        />
-        <textarea 
+      <>
+      <h1 className="mb-6">Add News</h1>
+      <form onSubmit={createNews} className="mb-12">
+        <div class="mb-5">
+          <label for="title" class="block text-gray-700 text-sm font-bold mb-2">News Title</label>
+          <input 
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            id="title" 
+            className="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            required />
+        </div>
+        <div class="mb-5">
+          <label for="teaser" class="block text-gray-700 text-sm font-bold mb-2">News Teaser</label>
+          <input
             value={teaser}
             onChange={(e) => setTeaser(e.target.value)}
-            placeholder="Teaser"
-            className={styles.input}
-        />
-        <textarea 
+            className="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            id="teaser"
+            required />
+        </div>
+        <div className="mb-5">
+          <label for="content" class="block text-gray-700 text-sm font-bold mb-2">News Content</label>
+          <textarea 
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Content"
-            className={styles.input}
-        />
-        <p>
-          <strong>Slug:</strong> {slug}
-        </p>
-        <button type="submit" disabled={!isValid} className="btn-green">
+            className="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            id="content" 
+            rows="4"/>
+        </div>
+        <div class="flex items-start mb-6">
+          <div class="flex items-center h-5">
+            <input 
+            type="text" 
+            aria-label="disabled input 2" 
+            className="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            value={slug} 
+            disabled readonly />
+          </div>
+          <label class="block text-gray-700 text-sm font-bold ml-2">Slug</label>
+        </div>
+        <button 
+        type="submit" 
+        disabled={!isValid}
+        className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
           Create New Post
-        </button>
-      </form>
+          </button>
+      </form> 
+    
+    </>
     );
 }

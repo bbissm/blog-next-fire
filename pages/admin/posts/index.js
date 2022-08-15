@@ -76,19 +76,32 @@ function CreateNewPost() {
   };
 
   return (
+    <>
+    <h1>Create new Post</h1>
     <form onSubmit={createPost}>
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="My Awesome Article!"
-        className="input"
-      />
-      <p>
-        <strong>Slug:</strong> {slug}
-      </p>
+      <div className="mb-6">
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="My Awesome Article!"
+          className="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <div class="flex items-start mb-6">
+        <div class="flex items-center h-5">
+          <input 
+          type="text" 
+          aria-label="disabled input 2" 
+          className="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+          value={slug} 
+          disabled readonly />
+        </div>
+        <label class="block text-gray-700 text-sm font-bold ml-2">Slug</label>
+      </div>
       <button type="submit" disabled={!isValid} className="btn-green">
         Create New Post
       </button>
     </form>
+    </>
   );
 }

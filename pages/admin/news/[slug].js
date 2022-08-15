@@ -11,6 +11,7 @@ import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import ImageUploader from '../../../components/ImageUploader';
+import Image from 'next/image';
 
 export default function AdminNewsEdit(props) {
   return (
@@ -59,7 +60,6 @@ function NewsForm({ defaultValues, newsRef, preview }) {
   const { isValid, isDirty, errors } = formState;
 
   const updateNews = async ({ content, published }) => {
-    console.log('form submited')
     await newsRef.update({
       content,
       published,
@@ -77,13 +77,17 @@ function NewsForm({ defaultValues, newsRef, preview }) {
     <form onSubmit={handleSubmit(updateNews)}>
       {preview && (
         <div className="card">
-          <ReactMarkdown>{watch('content')}</ReactMarkdown>
+            <ReactMarkdown>{watch('content')}</ReactMarkdown>
+            {console.log(watch('content'))}
         </div>
       )}
 
       <div className={preview ? styles.hidden : styles.controls}>
   
-        <textarea {...register('content', {maxLength:{value:2000,message:'Max value is 2000'}, minLength:{value:10,message:'Min value is 10'}, required: "This is required."})}></textarea>
+        <textarea 
+        rows="30"
+        className="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        {...register('content', {maxLength:{value:2000,message:'Max value is 2000'}, minLength:{value:10,message:'Min value is 10'}, required: "This is required."})}></textarea>
         
         {console.log(errors)}
         {errors.content && <p className="text-danger">{errors.content.message}</p>}

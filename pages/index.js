@@ -50,6 +50,7 @@ export default function Home(props) {
 
   return (
       <main>
+        <h1 className="text-3xl font-bold">See our posts!</h1>
         <PostFeed posts={posts} />
 
         {!loading && !postsEnd && <button onClick={getMorePosts}>Load more</button>}
