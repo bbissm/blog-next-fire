@@ -1,6 +1,9 @@
 import PostContent from "../../components/PostContent";
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
+import HeartButton from '../../components/HeartButton';
+import AuthCheck from '../../components/AuthCheck';
+import Link from "next/dist/client/link";
 
 export async function getStaticProps({ params }) {
     const { username, slug } = params;
@@ -48,19 +51,29 @@ export default function Post(props) {
     const postRef = firestore.doc(props.path);
 
     const [realtimePost] = useDocumentData(postRef);
-    console.log(realtimePost)
 
     const post = realtimePost || props.post;
+
+
     return (
         <main>
-            <section>
+            <AuthCheck
+              fallback={
+                <Link href="/enter">
+                  <button>💗 Sign Up</button>
+                </Link>
+              }
+            >
+              <section>
                 <PostContent post={post} />
-            </section>
-            <aside className="card">
-                <p>
-                <strong>{post.heartCount || 0} 🤍</strong>
-                </p>
-            </aside>
+              </section>
+              <aside className="card">
+                  <p> 
+                  <strong>{post.heartCount || 0} 🤍</strong>
+                  </p>
+                  <HeartButton postRef={postRef} />
+              </aside>
+            </AuthCheck>
         </main>
       );
 }
