@@ -14,6 +14,7 @@ export default function AdminPostsPage(props) {
     return (
       <main>
         <AuthCheck>
+          <h1 className="mb-6">Manage your News</h1>
           <CreateNewNews />
           <NewsList />
         </AuthCheck>
@@ -74,7 +75,6 @@ function CreateNewNews() {
   
     return (
       <>
-      <h1 className="mb-6">Add News</h1>
       <form onSubmit={createNews} className="mb-12">
         <div class="mb-5">
           <label for="title" class="block text-gray-700 text-sm font-bold mb-2">News Title</label>

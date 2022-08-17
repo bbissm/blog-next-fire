@@ -1,9 +1,11 @@
 import PostFeed from '../components/PostFeed';
 import Loader from '../components/Loader';
 import { firestore, fromMillis, postToJSON } from '../lib/firebase';
-
+import AuthCheck from '../components/AuthCheck';
 import { useState } from 'react';
-
+import SideNav from '../components/SideNav';
+import { useContext } from 'react';
+import { UserContext } from '../lib/context';
 // Max post to query per page
 const LIMIT = 1;
 
@@ -21,6 +23,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home(props) {
+  const { user, username } = useContext(UserContext);
   const [posts, setPosts] = useState(props.posts);
   const [loading, setLoading] = useState(false);
 
@@ -49,15 +52,18 @@ export default function Home(props) {
   };
 
   return (
+    <>
+      {username ? <SideNav /> : ''}
+
       <main>
-        <h1 className="text-3xl font-bold">See our posts!</h1>
-        <PostFeed posts={posts} />
-
-        {!loading && !postsEnd && <button onClick={getMorePosts}>Load more</button>}
-
-        <Loader show={loading} />
-
-        {postsEnd && 'You have reached the end!'}
+        <section>
+          <PostFeed posts={posts} />
+          {!loading && !postsEnd && <button onClick={getMorePosts}>Load more</button>}
+          <Loader show={loading} />
+          {postsEnd && 'You have reached the end!'}
+          </section>
       </main>
+    </>
+     
   );
 }

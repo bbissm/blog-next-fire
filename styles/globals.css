@@ -23,9 +23,12 @@ body {
 }
 
 
-
+#__next{
+  display: flex;
+}
 main {
-  padding: 1rem 10vw;
+  padding: 1rem 10vw; 
+  width: 100%;
 }
 
 h1 { font-size: 2rem; }

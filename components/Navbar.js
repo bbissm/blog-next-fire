@@ -33,7 +33,7 @@ export default function Navbar() {
             </li>
             <li>
               <Link href="/admin/news">
-                <button className="btn-green">News</button>
+                <button className="btn-green">Add News</button>
               </Link>
             </li>
             <li>

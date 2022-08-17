@@ -3,6 +3,7 @@ import UserProfile from '../../components/UserProfile';
 import PostFeed from '../../components/PostFeed';
 import NewsFeed from '../../components/NewsFeed';
 import { firestore, auth } from '../../lib/firebase';
+import AuthCheck from '../../components/AuthCheck';
 
 export async function getServerSideProps({ query }) {
   const { username } = query;
@@ -45,11 +46,13 @@ export async function getServerSideProps({ query }) {
 export default function UserProfilePage({ user, posts, news }) {
   return (
     <main>
-      <UserProfile user={user} />
-      <h1>POSTS</h1>
-      <PostFeed posts={posts} />
-      <h1>NEWS</h1>
-      <NewsFeed news={news} />
+      <AuthCheck>
+        <UserProfile user={user} />
+        <h1>POSTS</h1>
+        <PostFeed posts={posts} />
+        <h1>NEWS</h1>
+        <NewsFeed news={news} />
+      </AuthCheck>
     </main>
   );
 }
