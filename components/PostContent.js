@@ -4,7 +4,6 @@ import ReactMarkdown from 'react-markdown';
 //UI component for main post content
 export default function PostContent({ post }) {
     const createdAt = typeof post?.createdAt === 'number' ? new Date(post.createdAt) : post.createdAt.toDate() //Convert 
-
     return (
         <div className="card">
           <h1>{post?.title}</h1>

@@ -53,12 +53,17 @@ export default function Navbar() {
           <>
             <li>
               <Link href="/news">
-                <button className="btn-red">News</button>
+                <button className="btn-green">News</button>
+              </Link>
+            </li>
+            <li>
+              <Link href="/posts">
+                <button className="btn-blue">Posts</button>
               </Link>
             </li>
             <li>
               <Link href="/enter">
-                <button className="btn-blue">Log in</button>
+                <button className="btn-gray">Log in</button>
               </Link>
             </li>
           </>

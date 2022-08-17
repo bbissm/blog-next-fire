@@ -1,8 +1,8 @@
-import PostContent from "../../components/PostContent";
+import PostContent from "../../../components/PostContent";
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
-import HeartButton from '../../components/HeartButton';
-import AuthCheck from '../../components/AuthCheck';
+import { firestore, getUserWithUsername, postToJSON } from '../../../lib/firebase';
+import HeartButton from '../../../components/HeartButton';
+import AuthCheck from '../../../components/AuthCheck';
 import Link from "next/dist/client/link";
 
 export async function getStaticProps({ params }) {
