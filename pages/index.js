@@ -1,9 +1,8 @@
 import PostFeed from '../components/PostFeed';
 import Loader from '../components/Loader';
 import { firestore, fromMillis, postToJSON } from '../lib/firebase';
-import AuthCheck from '../components/AuthCheck';
 import { useState } from 'react';
-import SideNav from '../components/SideNav';
+import SideMenu from '../components/SideMenu';
 import { useContext } from 'react';
 import { UserContext } from '../lib/context';
 // Max post to query per page
@@ -53,7 +52,7 @@ export default function Home(props) {
 
   return (
     <>
-      {username ? <SideNav /> : ''}
+      {username ? <SideMenu /> : ''}
 
       <main>
         <section>
