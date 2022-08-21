@@ -1,48 +1,38 @@
-import { UserContext } from "../lib/context";
-import { useContext } from "react";
 import SideNav from "./SideNav";
 
-export default () => {
-    const {username} = useContext(UserContext);
-
+export default ({username}) => {
     const menuData = [
         {
             label: 'Home',
             to: '/',
         },
         {
-            label: 'Modules',
-            to: '',
+            label: 'Posts',
+            to: '/admin/posts',
             children: [
                 {
-                    label: 'News',
-                    to: 'admin/news',
-                    children: [
-                    {
-                        label: 'View News',
-                        to: 'admin/news',
-                        },
-                    {
-                        label: 'Add News',
-                        to: 'admin/news',
-                    }
-                    ],
+                label: 'Add Posts',
+                to: 'add',
                 },
                 {
-                label: 'Posts',
-                to: 'admin/posts',
-                children: [
-                    {
-                        label: 'View Posts',
-                        to: 'admin/posts',
-                    },
-                    {
-                    label: 'Add Posts',
-                    to: 'admin/posts',
-                    }
-                ],
+                    label: 'View Posts',
+                    to: '',
                 },
             ],
+        },
+        {
+            label: 'News',
+            to: '/admin/news',
+            children: [
+                {
+                    label: 'Add News',
+                    to: 'add',
+                },
+                {
+                    label: 'View News',
+                    to: '',
+                }
+            ]
         },
         {
             label: 'User Panel',

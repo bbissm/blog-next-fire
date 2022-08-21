@@ -52,8 +52,6 @@ export default function Home(props) {
 
   return (
     <>
-      {username ? <SideMenu /> : ''}
-
       <main>
         <section>
           <PostFeed posts={posts} />

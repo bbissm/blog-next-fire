@@ -28,19 +28,6 @@ export default function Navbar() {
         {/* user is signed-in and has username */}
         {username && (
           <>
-            <li className="push-left">
-              <button onClick={signOut}>Sign Out</button>
-            </li>
-            <li>
-              <Link href="/admin/news">
-                <button className="btn-green">Add News</button>
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin/posts">
-                <button className="btn-blue">Write Posts</button>
-              </Link>
-            </li>
             <li>
               <Link href={`/${username}`}>
                 <img src={user?.photoURL || '/hacker.png'} />

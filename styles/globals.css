@@ -19,7 +19,7 @@ body {
   font-family: 'Noto Sans', sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
-  margin-top: 50px;
+  margin-top: 35px;
 }
 
 
@@ -43,6 +43,11 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+aside{
+  min-height: calc(100vh - 70px);
+  min-width: 10rem;
 }
 
 img {max-width: 100%;}

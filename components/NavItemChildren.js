@@ -17,10 +17,10 @@ export default function NavItemChildren (props) {
   const onExpandedChange = () => {
     setExpanded(!isExpanded);
   };
-	
+
   return (
     <li>
-      <button className="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+      <button className={`flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group dark:text-white ${isExpanded && 'dark:bg-gray-400'} dark:bg-gray-700`}
         onClick={onExpandedChange}
       >
       <span className="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item="">{label}</span>
@@ -51,7 +51,7 @@ export default function NavItemChildren (props) {
                 key={key}
                 href={resolveLinkPath(item.to, props.item.to)}
               >
-                <a className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                <a className={`flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700`}>
                 <span>{label}</span>
                 </a>
               </Link>

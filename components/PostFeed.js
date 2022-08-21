@@ -3,7 +3,6 @@ import Link from 'next/link';
 export default function PostFeed({ posts, admin }) {
   return (
     <>
-      <h1 className="text-3xl font-bold">See our posts!</h1>
       {posts ? posts.map((post) =>
         <PostItem post={post} key={post.slug} admin={admin} />
       ) : null}
