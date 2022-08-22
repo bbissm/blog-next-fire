@@ -24,9 +24,26 @@ export default function Navbar() {
             <button className="btn-logo">NXT</button>
           </Link>
         </li>
-       
+        <>
+          <li>
+            <Link href="/components">
+              <button className="btn-gray">Components</button>
+            </Link>
+          </li>
+          <li>
+            <Link href="/news">
+              <button className="btn-green">News</button>
+            </Link>
+          </li>
+          <li>
+            <Link href="/posts">
+              <button className="btn-blue">Posts</button>
+            </Link>
+          </li>
+          
+        </>
         {/* user is signed-in and has username */}
-        {username && (
+        {username ? (
           <>
             <li>
               <Link href={`/${username}`}>
@@ -34,26 +51,12 @@ export default function Navbar() {
               </Link>
             </li>
           </>
-        )}
-        {/* user is not signed OR has not created username */}
-        {!username && (
-          <>
-            <li>
-              <Link href="/news">
-                <button className="btn-green">News</button>
-              </Link>
-            </li>
-            <li>
-              <Link href="/posts">
-                <button className="btn-blue">Posts</button>
-              </Link>
-            </li>
-            <li>
-              <Link href="/enter">
-                <button className="btn-gray">Log in</button>
-              </Link>
-            </li>
-          </>
+        ) : (
+        <li>
+            <Link href="/enter">
+              <button className="btn-gray">Log in</button>
+            </Link>
+          </li>
         )}
       </ul>
     </nav>

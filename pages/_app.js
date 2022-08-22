@@ -6,7 +6,14 @@ import { useEffect, useAuthState, auth } from 'react'
 import {useUserData} from '../lib/hooks'
 import SideMenu from '../components/SideMenu';
 
+import { library, faSolid } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faMicrochip } from '@fortawesome/free-solid-svg-icons'
+
+
 function MyApp({ Component, pageProps }) {
+
+  library.add(fab, faMicrochip)
 
   const userData = useUserData();
 
