@@ -6,18 +6,21 @@ import { useRouter } from 'next/router';
 import kebabCase from 'lodash.kebabcase';
 import toast from 'react-hot-toast';
 
-export default function AdminPostsPage(props) {
+
+export default function AdminPostsPage() {
+  const router = useRouter()
+  const { locale, locales, defaultLocale } = router
   return (
     <main>
       <AuthCheck>
-        <CreateNewPost />
+        <CreateNewPost locale={locale}/>
       </AuthCheck>
     </main>
   );
 }
 
-function CreateNewPost() {
-  const router = useRouter();
+function CreateNewPost({locale}) {
+  const router = useRouter()
   const { username } = useContext(UserContext);
   const [title, setTitle] = useState('');
   const [teaser, setTeaser] = useState('');
@@ -34,23 +37,31 @@ function CreateNewPost() {
     e.preventDefault();
     const uid = auth.currentUser.uid;
     const ref = firestore.collection('users').doc(uid).collection('posts').doc(slug);
+    const locales = ref.collection('locales').doc(locale);
 
     // Tip: give all fields a default value here
     const data = {
-      title,
       slug,
       uid,
       username,
       published: false,
-      content,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
-      heartCount: 0,
+      heartCount: 0
     };
 
-    await ref.set(data);
+    const localeData = {
+      content,
+      title,
+      uid,
+      pid: slug
+    }
 
-    toast.success('Post created!')
+    await ref.set(data);
+    await locales.set(localeData);
+
+    toast.success('Post created!'+locale)
+    console.log(locale);
 
     // Imperative navigation after doc is set
     router.push(`/admin/posts/${slug}`);

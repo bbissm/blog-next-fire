@@ -26,7 +26,6 @@ export async function getServerSideProps({ query }) {
 
 
 export default function PostPage(props) {
-    console.log(props)
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState(props.posts);
   

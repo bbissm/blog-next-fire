@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { UserContext } from '../lib/context';
 import { auth } from '../lib/firebase';
 import AuthCheck from './AuthCheck';
+import LocaleSwitcher from './LocaleSwitcher';
 
 // Top navbar
 export default function Navbar() {
@@ -58,6 +59,9 @@ export default function Navbar() {
             </Link>
           </li>
         )}
+        <li>
+          <LocaleSwitcher />
+        </li>
       </ul>
     </nav>
   );

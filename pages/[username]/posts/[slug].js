@@ -4,9 +4,13 @@ import { firestore, getUserWithUsername, postToJSON } from '../../../lib/firebas
 import HeartButton from '../../../components/HeartButton';
 import AuthCheck from '../../../components/AuthCheck';
 import Link from "next/dist/client/link";
+import { useRouter } from "next/router";
+import LocaleSwitcher from "../../../components/LocaleSwitcher";
+
 
 export async function getStaticProps({ params }) {
-    const { username, slug } = params;
+  console.log(params)
+    const { username, slug, locale, locales } = params;
     const userDoc = await getUserWithUsername(username);
     
     let post;
@@ -26,7 +30,8 @@ export async function getStaticProps({ params }) {
     };
   }
   
-  export async function getStaticPaths() {
+  export async function getStaticPaths({locales}) {
+    console.log(locales)
     // Improve my using Admin SDK to select empty docs
     const snapshot = await firestore.collectionGroup('posts').get();
     
@@ -48,6 +53,7 @@ export async function getStaticProps({ params }) {
   }
 
 export default function Post(props) {
+    const {defaultLocale, isFallback, query} = useRouter();
     const postRef = firestore.doc(props.path);
 
     const [realtimePost] = useDocumentData(postRef);
