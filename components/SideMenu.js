@@ -35,6 +35,20 @@ export default ({username}) => {
             ]
         },
         {
+            label: 'Articles',
+            to: '/admin/articles',
+            children: [
+                {
+                    label: 'Add Article',
+                    to: 'add',
+                },
+                {
+                    label: 'View Articles',
+                    to: '',
+                }
+            ]
+        },
+        {
             label: 'User Panel',
             to: `/${username}`,
         },

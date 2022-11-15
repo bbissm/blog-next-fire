@@ -8,10 +8,10 @@ export default function LocaleSwitcher() {
 
   return (
     <div>
-        {otherLocales.map((locale) => {
-          const { pathname, query, asPath } = router
+        {otherLocales.map((locale,index) => {
+          const { pathname, query, asPath } = router;
           return (
-            <Link href={{ pathname, query }} as={asPath} locale={locale}>
+            <Link key={index} href={{ pathname, query }} as={asPath} locale={locale}>
               <a>&nbsp;{locale}&nbsp;</a>
             </Link>
           )
