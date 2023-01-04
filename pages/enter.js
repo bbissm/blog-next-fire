@@ -1,4 +1,4 @@
-import { auth, firestore, googleAuthProvider } from '../lib/firebase';
+import { auth, firestore, googleAuthProvider, facebookAuthProvider } from '../lib/firebase';
 import { UserContext } from '../lib/context';
 import Metatags from '../components/Metatags';
 import { useEffect, useState, useCallback, useContext } from 'react';
@@ -13,21 +13,32 @@ export default function Enter(props) {
   return (
     <main>
       <Metatags title="Enter" description="Sign up for this amazing app!" />
-      {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
+      {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButtons />}
     </main>
   );
 }
 
 // Sign in with Google button
-function SignInButton() {
+function SignInButtons() {
   const signInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);
   };
 
+  const signInWithFacebook = async () => {
+    await auth.signInWithPopup(facebookAuthProvider);
+  };
+
+
   return (
-      <button className="btn-google" onClick={signInWithGoogle}>
-        <img src={'/google.png'} width="30px" /> Sign in with Google
-      </button>
+      <>
+       <button className="btn-google" onClick={signInWithGoogle}>
+          <img src={'/google.png'} width="30px" /> Sign in with Google
+        </button>
+        <button className="btn-google" onClick={signInWithFacebook}>
+          <img src={'/google.png'} width="30px" /> Sign in with Facebook
+        </button>
+      </>
+     
   );
 }
 
