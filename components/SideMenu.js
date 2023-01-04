@@ -1,6 +1,24 @@
+import { useEffect, useState } from "react";
 import SideNav from "./SideNav";
 
-export default ({username}) => {
+export default function SideMenu({props, username}) {
+    const [data, setData] = useState(null);
+
+    const fetchData = async () => {
+        try {
+        const response = await fetch('http://restapi.loc:88/articles');
+        const data = await response.json();
+        setData(data);
+        } catch (error) {
+            setData(null);
+            console.error('Fetch failed. Please run the api server.');
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     const menuData = [
         {
             label: 'Home',
@@ -53,7 +71,9 @@ export default ({username}) => {
             to: `/${username}`,
         },
     ]
-
+    if (data === null) {
+        menuData = menuData.filter(item => item.label !== 'Articles');
+    }
     return (
         <SideNav data={menuData}/>
     );
