@@ -38,7 +38,7 @@ export default (props) => {
                                 return(
                                     <li key={index} className="flex place-items-center">
                                         <FontAwesomeIcon icon="fa-microchip" />
-                                        <Link href={item.URL}>
+                                        <Link legacyBehavior href={item.URL}>
                                             <a className="gap-12 hover:dark:bg-gray-300 rounded p-3" target={"_blank"}>{item.Model} - {item.Benchmark}</a>
                                         </Link>
                                     </li>
@@ -67,7 +67,7 @@ export default (props) => {
                         return(
                             <li key={index} className="flex place-items-center">
                                 <FontAwesomeIcon icon="fa-microchip" />
-                                <Link href={component.URL}>
+                                <Link legacyBehavior href={component.URL}>
                                     <a className="gap-12 hover:dark:bg-gray-300 rounded p-3">{component.Model} - {component.Benchmark}</a>
                                 </Link>
                             </li>

@@ -10,7 +10,7 @@ export default function NewsContent({ news }) {
           <h1>{news?.title}</h1>
           <span className="text-sm">
             Written by{' '}
-            <Link href={`/${news.username}/`}>
+            <Link legacyBehavior href={`/${news.username}/`}>
               <a className="text-info">@{news.username}</a>
             </Link>{' '}
             on {createdAt.toISOString()}

@@ -11,7 +11,7 @@ export default function LocaleSwitcher() {
         {otherLocales.map((locale,index) => {
           const { pathname, query, asPath } = router;
           return (
-            <Link key={index} href={{ pathname, query }} as={asPath} locale={locale}>
+            <Link legacyBehavior key={index} href={{ pathname, query }} as={asPath} locale={locale}>
               <a>&nbsp;{locale}&nbsp;</a>
             </Link>
           )

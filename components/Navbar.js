@@ -21,28 +21,28 @@ export default function Navbar() {
     <nav className="navbar">
       <ul>
         <li>
-          <Link href="/">
+          <Link legacyBehavior href="/">
             <button className="btn-logo">NXT</button>
           </Link>
         </li>
         <>
           <li>
-            <Link href="/articles">
+            <Link legacyBehavior href="/articles">
               <button className="btn-gray">Articles</button>
             </Link>
           </li>
           <li>
-            <Link href="/components">
+            <Link legacyBehavior href="/components">
               <button className="btn-gray">Components</button>
             </Link>
           </li>
           <li>
-            <Link href="/news">
+            <Link legacyBehavior href="/news">
               <button className="btn-green">News</button>
             </Link>
           </li>
           <li>
-            <Link href="/posts">
+            <Link legacyBehavior href="/posts">
               <button className="btn-blue">Posts</button>
             </Link>
           </li>
@@ -52,14 +52,14 @@ export default function Navbar() {
         {username ? (
           <>
             <li>
-              <Link href={`/${username}`}>
+              <Link legacyBehavior href={`/${username}`}>
                 <img src={user?.photoURL || '/hacker.png'} />
               </Link>
             </li>
           </>
         ) : (
         <li>
-            <Link href="/enter">
+            <Link legacyBehavior href="/enter">
               <button className="btn-gray">Log in</button>
             </Link>
           </li>

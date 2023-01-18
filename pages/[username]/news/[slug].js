@@ -59,7 +59,7 @@ export default function News(props) {
         <main>
             <AuthCheck
               fallback={
-                <Link href="/enter">
+                <Link legacyBehavior href="/enter">
                   <button>💗 Sign Up</button>
                 </Link>
               }

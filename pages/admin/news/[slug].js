@@ -44,7 +44,7 @@ function NewsManager() {
           <aside>
           <h3>Tools</h3>
             <button onClick={() => setPreview(!preview)}>{preview ? 'Edit' : 'Preview'}</button>
-            <Link href={`/${news.username}/${news.slug}`}>
+            <Link legacyBehavior href={`/${news.username}/${news.slug}`}>
               <button className="btn-blue">Live view</button>
             </Link>
           </aside>

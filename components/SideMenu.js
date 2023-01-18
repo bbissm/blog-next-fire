@@ -19,7 +19,7 @@ export default function SideMenu({props, username}) {
         fetchData();
     }, []);
 
-    const menuData = [
+    let menuData = [
         {
             label: 'Home',
             to: '/',

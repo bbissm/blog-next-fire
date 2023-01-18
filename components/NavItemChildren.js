@@ -47,7 +47,7 @@ export default function NavItemChildren (props) {
             }
 
             return (
-              <Link
+              <Link legacyBehavior
                 key={key}
                 href={resolveLinkPath(item.to, props.item.to)}
               >

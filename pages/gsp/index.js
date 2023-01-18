@@ -25,17 +25,17 @@ export default function GspPage(props) {
 
       <LocaleSwitcher />
 
-      <Link href="/gsp/first">
+      <Link legacyBehavior href="/gsp/first">
         <a>To dynamic getStaticProps page</a>
       </Link>
       <br />
 
-      <Link href="/gssp">
+      <Link legacyBehavior href="/gssp">
         <a>To getServerSideProps page</a>
       </Link>
       <br />
 
-      <Link href="/">
+      <Link legacyBehavior href="/">
         <a>To index page</a>
       </Link>
       <br />
