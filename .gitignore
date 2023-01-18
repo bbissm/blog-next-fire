@@ -36,3 +36,4 @@ pubsub-debug.log*
 # vercel
 .vercel
 htdocs
+package-lock.json
