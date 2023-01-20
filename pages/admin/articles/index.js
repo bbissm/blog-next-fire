@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AuthCheck from "../../../components/AuthCheck";
+import { restapi } from "../../../global";
 
 export default function AdminPostsPage(props) {
   const { data } = props;
@@ -21,7 +22,7 @@ export default function AdminPostsPage(props) {
 
   export async function getServerSideProps() {
     try {
-      const response = await fetch("http://restapi.loc:88/articles");
+      const response = await fetch(`${restapi.apiUrl}/articles`);
       const data = await response.json();
   
       return {

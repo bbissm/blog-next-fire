@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import restapi from "../global";
+import { restapi } from "../global";
 import SideNav from "./SideNav";
 
 export default function SideMenu({props, username}) {

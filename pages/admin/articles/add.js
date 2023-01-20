@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import AuthCheck from "../../../components/AuthCheck";
 import toast from "react-hot-toast";
+import { restapi } from "../../../global";
 
 export default function AdminPostsPage(props) {
     return (
@@ -32,7 +33,7 @@ function CreateNewArticle() {
       // Tip: give all fields a default value here
       const data = { title:title };
 
-      const response = await fetch(`http://restapi.loc:88/articles`, {
+      const response = await fetch(`${restapi.apiUrl}/articles`, {
         method:'POST',
         body: JSON.stringify(data)
       })
