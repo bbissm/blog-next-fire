@@ -37,3 +37,4 @@ pubsub-debug.log*
 .vercel
 htdocs
 package-lock.json
+lib/firebase.js

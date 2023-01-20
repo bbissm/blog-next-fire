@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { restapi } from '../../global';
 
 export async function getServerSideProps({ query }) {
-    const res = await fetch(`http://restapi.loc:88/articles`)
+    const res = await fetch(`${restapi.apiUrl}/articles`)
     const articles = await res.json()
 
   return {

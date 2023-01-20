@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import restapi from "../global";
 import SideNav from "./SideNav";
 
 export default function SideMenu({props, username}) {
@@ -6,8 +7,8 @@ export default function SideMenu({props, username}) {
 
     const fetchData = async () => {
         try {
-        const response = await fetch('http://restapi.loc:88/articles');
-        const data = await response.json();
+            const response = await fetch(`${restapi.apiUrl}/articles`)
+            const data = await response.json();
         setData(data);
         } catch (error) {
             setData(null);

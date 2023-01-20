@@ -1,45 +1,42 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { restapi } from '../../global';
+import { useState, useEffect } from 'react';
 
-
-export async function getStaticProps() {
-    const resCpu = await fetch('http://restapi.loc:88/component/cpu')  // your fetch function here 
-    const cpus = await resCpu.json()
-
-    const resGpu = await fetch('http://restapi.loc:88/component/gpu')  // your fetch function here 
-    const gpus = await resGpu.json()
-
-    const resRam = await fetch('http://restapi.loc:88/component/ram')  // your fetch function here 
-    const ram = await resRam.json()
-
-    const resSsd = await fetch('http://restapi.loc:88/component/ssd')  // your fetch function here 
-    const ssd = await resSsd.json()
-    const components = [cpus,gpus,ram,ssd]
-    return {
-        props: {components}
-    };
+const fetchComponents = async (type) => {
+  const res = await fetch(`${restapi.apiUrl}/component/${type}`);
+  const data = await res.json();
+  return data;
 }
 
-
-
-
-export default (props) => {
-
-    const {components} = props;
+export default () => {
+    const [components, setComponents] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const [cpus, gpus, ram, ssd] = await Promise.all([
+                fetchComponents('cpu'),
+                fetchComponents('gpu'),
+                fetchComponents('ram'),
+                fetchComponents('ssd')
+            ]);
+            setComponents([cpus, gpus, ram, ssd]);
+        }
+        fetchData();
+    }, []);
     return (
         <main>
             <div className="grid grid-cols-4 gap-4">
                 {components.map((component) => {
-                    const rankAscending = [...component].sort((a, b) => b.Benchmark - a.Benchmark);
+                    const sortedComponents = [...component].sort((a, b) => b.Benchmark - a.Benchmark);
                     return(
                         <ul>
-                            <h2 className='font-weight-700'>{rankAscending[0].Type}</h2>
-                            {component.map((item,index) => {
+                            <h2 className='font-weight-700'>{sortedComponents[0].Type}</h2>
+                            {sortedComponents.map((item) => {
                                 return(
-                                    <li key={index} className="flex place-items-center">
+                                    <li key={item.id} className="flex place-items-center">
                                         <FontAwesomeIcon icon="fa-microchip" />
-                                        <Link legacyBehavior href={item.URL}>
-                                            <a className="gap-12 hover:dark:bg-gray-300 rounded p-3" target={"_blank"}>{item.Model} - {item.Benchmark}</a>
+                                        <Link href={item.URL} className="gap-12 hover:dark:bg-gray-300 rounded p-3" >
+                                            {item.Model} - {item.Benchmark}
                                         </Link>
                                     </li>
                                 )
@@ -47,34 +44,7 @@ export default (props) => {
                         </ul>
                     )
                 })}
-           </div>
-        </main>
-    );
-}
-
-
-
-/*export default (props) => {
-    const {cpus} = props;
-    const rankAscending = [...cpus].sort((a, b) => b.Benchmark - a.Benchmark);
-    return (
-        <main>
-           <div className="grid grid-cols-4 gap-4">
-                <ul>
-                    <h2 className='font-weight-700'>{rankAscending[0].Type}</h2>
-                        {rankAscending.map((component, index) => {
-                            
-                        return(
-                            <li key={index} className="flex place-items-center">
-                                <FontAwesomeIcon icon="fa-microchip" />
-                                <Link legacyBehavior href={component.URL}>
-                                    <a className="gap-12 hover:dark:bg-gray-300 rounded p-3">{component.Model} - {component.Benchmark}</a>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
             </div>
         </main>
     );
-}*/
+}
