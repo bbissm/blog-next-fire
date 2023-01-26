@@ -27,22 +27,33 @@ function CreateNewArticle() {
     const isValid = title.length > 3 && title.length < 100;
   
     // Create a new post in firestore
-    const createArticle = async (e) => {
-      e.preventDefault();
-  
-      // Tip: give all fields a default value here
-      const data = { title:title };
+    const createArticle = (e) => {
+        e.preventDefault();
 
-      const response = await fetch(`${restapi.apiUrl}/articles`, {
-        method:'POST',
-        body: JSON.stringify(data)
-      })
-      if (response.ok) {
-        toast.success(`Article ${title} created! `);
-      }
-      // router.push(`/admin/Article/${slug}`);
+        // Tip: give all fields a default value here
+        const data = { title: title };
+        fetch(`${restapi.apiUrl}/articles`, {
+            method:'POST',
+            body: JSON.stringify(data)
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then((json) => {
+                console.log(json);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+
     };
-  
+
+
+
     return (
       <>
       <form onSubmit={createArticle} className="mb-12">
