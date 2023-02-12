@@ -4,6 +4,7 @@ import { useState } from "react";
 import AuthCheck from "../../../components/AuthCheck";
 import toast from "react-hot-toast";
 import { restapi } from "../../../global";
+import token from "../../../lib/token";
 
 export default function AdminPostsPage(props) {
     return (
@@ -19,7 +20,6 @@ export default function AdminPostsPage(props) {
 function CreateNewArticle() {
     const router = useRouter();
     const [title, setTitle] = useState('');
-
     // Ensure slug is URL safe
     const slug = encodeURI(kebabCase(title));
   
@@ -34,6 +34,10 @@ function CreateNewArticle() {
         const data = { title: title };
         fetch(`${restapi.apiUrl}/articles`, {
             method:'POST',
+            headers: {
+              'Authorization': 'Bearer ' + token,
+              'Content-Type': 'application/json'
+            },
             body: JSON.stringify(data)
         })
             .then((response) => {
